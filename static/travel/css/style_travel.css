@@ -1,0 +1,43 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+#container{
+    width: 600px;
+    display: table;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid black;
+    margin-top: 30px;
+}
+
+h1{
+    padding-bottom: 30px;
+    color: green;
+}
+
+ul{
+    margin-left: 450px;
+}
+ul li{
+    list-style: none;
+    display: inline;
+    margin-left: 10px;
+}
+
+table{
+    border-collapse: collapse;
+    margin: 10px;
+    margin-bottom: 30px;
+}
+
+table, th, td{
+    border: 1px solid black;
+    padding: 4px;
+}
+
+
+#add_link{
+    margin-left: 450px;
+}
