@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'travel/css/style_travel.css' %}">
+    <title>Home</title>
+</head>
+<body>
+    <div id="container">
+        <ul>
+            <li><a href="/travels">Home</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+        <div id="content">
+            <h1>Hello, {{user.username}}</h1>
+            <div id="top">
+                <p>Your Trip Schedules</p>
+                <table>
+                    <thead>
+                        <th>Destination</th>
+                        <th>Travel Start Date</th>
+                        <th>Travel End Date</th>
+                        <th>Plan</th>
+                    </thead>
+                    <tbody>
+                        {% for trip in trips %}
+                        <tr>
+                            <td>{{trip.destination}}</td>
+                            <td>{{trip.start_on}}</td>
+                            <td>{{trip.end_on}}</td>
+                            <td>{{trip.description}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div id="bottom">
+                <p>Other User's Travel Plans</p>
+                <table>
+                    <thead>
+                            <th>Name</th>
+                            <th>Destination</th>
+                            <th>Travel Start Date</th>
+                            <th>Travel End Date</th>
+                            <th>Do You Want to Join?</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
+            <a id="add_link" href="/travels/add">Add Travel Plan</a>
+        </div>
+    </div>
+</body>
+</html>
