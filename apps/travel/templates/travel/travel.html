@@ -28,7 +28,7 @@
                     <tbody>
                         {% for trip in trips %}
                         <tr>
-                            <td>{{trip.destination}}</td>
+                            <td><a href="/travels/destination/{{trip.id}}">{{trip.destination}}</a></td>
                             <td>{{trip.start_on}}</td>
                             <td>{{trip.end_on}}</td>
                             <td>{{trip.description}}</td>
@@ -47,14 +47,16 @@
                             <th>Travel End Date</th>
                             <th>Do You Want to Join?</th>
                         </thead>
+                        {% for trip in all_trips %}
                         <tbody>
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>{{trip.created_by.username}}</td>
+                                <td><a href="/travels/destination/{{trip.id}}">{{trip.destination}}</a></td>
+                                <td>{{trip.start_on}}</td>
+                                <td>{{trip.end_on}}</td>
+                                <td><a href="/travels/join/{{trip.id}}">Join</a></td>
                             </tr>
+                        {% endfor %}
                         </tbody>
                 </table>
             </div>

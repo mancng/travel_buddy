@@ -50,8 +50,6 @@ def logout(request):
     return redirect('/')
 
 def add(request):
-    
-
     context = {
     'date' : time.strftime('%Y-%m-%d'),
     'id' : request.session['user_id']
@@ -68,24 +66,59 @@ def add_trip(request):
         else:
             trip_id = potential_errors['data'].id
             user = request.session['user_id']
+            user_int = User.objects.get(id=user)
             trip = Trip.objects.get(id=trip_id)
-            trip.users.add(user)
+            trip.created_by = user_int
+            trip.attendees.add(user)
             trip.save()
-            print potential_errors['data']
             return redirect('/travels')
     else:
         return redirect('/travels/add')
 
 def travels(request):
     if 'user_id' in request.session:
-        user = User.objects.get(id=request.session['user_id'])
-        trips = User.objects.get(id=request.session['user_id']).trips.all()
+
+        user_id = request.session['user_id']
+        user = User.objects.get(id=user_id)
+        trips = User.objects.get(id=user_id).trips.all()
+
+        all_trips = Trip.objects.exclude(attendees__id=user_id)
 
         context = {
             'user': user,
-            'trips': trips
+            'trips': trips,
+            'all_trips': all_trips
         }
-
         return render(request, 'travel/travel.html', context)
     else:
         return redirect('/')
+
+def destination(request, trip_id):
+
+    user_id = request.session['user_id']
+    trip_id = trip_id
+    trip = Trip.objects.get(id=trip_id)
+
+    # ******************************************
+    attendees = Trip.objects.get(id=trip_id).attendees.exclude(username=trip.created_by.username)
+    # attendees = Trip.objects.get(id=trip_id).attendees.all()
+
+    print attendees
+
+    # attendees = Trip.objects.filter(id=trip_id).exclude(attendees__id=user_id) | Trip.objects.filter(id=trip_id).exclude(created_by=user_id)
+
+    context = {
+        'trip_id': trip_id,
+        'trip_info': trip,
+        'attendees': attendees
+    }
+    return render(request, 'travel/single.html', context)
+
+def join(request, trip_id):
+    user_id = request.session['user_id']
+    trip_id = trip_id
+
+    trip = Trip.objects.get(id=trip_id)
+    trip.attendees.add(user_id)
+    trip.save()
+    return redirect('/travels')

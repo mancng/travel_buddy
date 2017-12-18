@@ -15,7 +15,19 @@
             <li><a href="/logout">Logout</a></li>
         </ul>
         <div id="content">
-
+            <h2>{{trip_info.destination}}</h2>
+            <div id="top">
+                <p>Planned By: {{trip_info.created_by.username}}</p>
+                <p>Description: {{trip_info.description}}</p>
+                <p>Travel Date From: {{trip_info.start_on}}</p>
+                <p>Travel Date to: {{trip_info.end_on}}</p>
+            </div>
+            <h2>Other users' joining the trip:</h2>
+            <div id="bottom">
+                {% for attendee in attendees %}
+                    <p>{{attendee.username}}</p>
+                {% endfor%}
+            </div>
         </div>
     </div>
 </body>

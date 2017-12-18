@@ -112,7 +112,6 @@ class TripManager(models.Manager):
             }
             return response
 
-
 class User(models.Model):
     name = models.CharField(max_length=255)
     username = models.CharField(max_length=255)
@@ -126,7 +125,8 @@ class Trip(models.Model):
     description = models.CharField(max_length=255)
     start_on = models.DateField(null=True)
     end_on = models.DateField(null=True)
-    users = models.ManyToManyField(User, related_name="trips")
+    created_by = models.ForeignKey(User, related_name="created_trips", null=True)
+    attendees = models.ManyToManyField(User, related_name="trips")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = TripManager()

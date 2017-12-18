@@ -9,4 +9,6 @@ urlpatterns = [
     url(r'^travels/add$', views.add),
     url(r'^add_trip', views.add_trip),
     url(r'^travels$', views.travels),
+    url(r'^travels/destination/(?P<trip_id>\d+)$', views.destination),
+    url(r'^travels/join/(?P<trip_id>\d+)$', views.join)
 ]
