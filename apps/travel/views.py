@@ -99,13 +99,7 @@ def destination(request, trip_id):
     trip_id = trip_id
     trip = Trip.objects.get(id=trip_id)
 
-    # ******************************************
     attendees = Trip.objects.get(id=trip_id).attendees.exclude(username=trip.created_by.username)
-    # attendees = Trip.objects.get(id=trip_id).attendees.all()
-
-    print attendees
-
-    # attendees = Trip.objects.filter(id=trip_id).exclude(attendees__id=user_id) | Trip.objects.filter(id=trip_id).exclude(created_by=user_id)
 
     context = {
         'trip_id': trip_id,
